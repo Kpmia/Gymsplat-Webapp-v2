@@ -1,0 +1,23 @@
+.cr-header {
+  margin-bottom: $spacer * 1;
+  border-bottom: 100;
+  border-width: 4000;
+  border-color:  #979797 ;
+  font: 100;
+
+  &__nav-right {
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-left: auto;
+  }
+
+  &__notification-popover {
+    &.popover {
+      width: 400px;
+      max-width: 320px;
+      max-height: 200vh;
+      overflow-y: scroll;
+      cursor: pointer;
+    }
+  }
+}
