@@ -49,7 +49,7 @@ class DashboardPage extends React.Component {
 
   getCardioCount() {
     const okay = db
-      .collection("gtuniversity")
+      .collection("fitnessonbroughton")
       .doc("cardiomachines")
       .collection("peoplecount")
       .orderBy("timestamp", "desc")
@@ -99,48 +99,48 @@ class DashboardPage extends React.Component {
       });
   }
 
-  addTime() {
-    if (this.state.weightsData != null) {
-      firebase
-        .database()
-        .ref("crc/location/weights/" + this.state.weightsData.timestamp.seconds)
-        .set({
-          timestamp: this.state.weightsData.timestamp.seconds,
-          people: this.state.weightsData.People,
-          minute: this.state.weightsData.Minute,
-          hour: this.state.weightsData.Hour,
-          day: this.state.weightsData.Day,
-          month: this.state.weightsData.Month,
-        });
-    }
-  }
+  // addTime() {
+  //   if (this.state.weightsData != null) {
+  //     firebase
+  //       .database()
+  //       .ref("crc/location/weights/" + this.state.weightsData.timestamp.seconds)
+  //       .set({
+  //         timestamp: this.state.weightsData.timestamp.seconds,
+  //         people: this.state.weightsData.People,
+  //         minute: this.state.weightsData.Minute,
+  //         hour: this.state.weightsData.Hour,
+  //         day: this.state.weightsData.Day,
+  //         month: this.state.weightsData.Month,
+  //       });
+  //   }
+  // }
 
-  getGraphData() {
-    firebase
-      .database()
-      .ref("crc/location/weights")
-      .on("value", (event) => {
-        let times = event.val();
+  // getGraphData() {
+  //   firebase
+  //     .database()
+  //     .ref("crc/location/weights")
+  //     .on("value", (event) => {
+  //       let times = event.val();
 
-        let newState = [];
+  //       let newState = [];
 
-        for (var time in times) {
-          newState.push({
-            people: times[time].people,
-            minute: times[time].minute,
-            hour: times[time].hour,
-          });
-        }
+  //       for (var time in times) {
+  //         newState.push({
+  //           people: times[time].people,
+  //           minute: times[time].minute,
+  //           hour: times[time].hour,
+  //         });
+  //       }
 
-        this.setState({
-          times: newState,
-        });
-      });
-  }
+  //       this.setState({
+  //         times: newState,
+  //       });
+  //     });
+  // }
 
   getWeightsCount() {
     const ref = db
-      .collection("gtuniversity")
+      .collection("fitnessonbroughton")
       .doc("weights")
       .collection("peoplecount")
       .orderBy("timestamp", "desc")
@@ -178,8 +178,8 @@ class DashboardPage extends React.Component {
 
   getSquatRackCount() {
     const okay = db
-      .collection("gtuniversity")
-      .doc("squatracks")
+      .collection("fitnessonbroughton")
+      .doc("weights")
       .collection("peoplecount")
       .orderBy("timestamp", "desc")
       .limit(1);
@@ -212,9 +212,9 @@ class DashboardPage extends React.Component {
 
   getBenchPress() {
     const okay = db
-      .collection("gtuniversity")
-      .doc("benchpress")
-      .collection("peoplecount")
+    .collection("fitnessonbroughton")
+    .doc("weights")
+    .collection("peoplecount")
       .orderBy("timestamp", "desc")
       .limit(1);
     okay.get().then((snapshot) => {
@@ -299,7 +299,7 @@ class DashboardPage extends React.Component {
 
     this.getBenchPress();
     this.getWeightsCount();
-    this.getGraphData();
+    // this.getGraphData();
 
     this.getCardioCount();
     this.getSquatRackCount();
@@ -440,7 +440,7 @@ class DashboardPage extends React.Component {
                   this.state.timeBMinute
                 }
                 subtitle={total + " currently"}
-                val="500 today"
+                val="FULL VERSION FEATURE"
                 number="5,400"
                 color="#F08A87"
               />
@@ -458,16 +458,16 @@ class DashboardPage extends React.Component {
                 }}
                 icon="ok"
                 title="Reservations"
-                smalltitle={
-                  this.state.reserveUpdate.length == 0
-                    ? "LAST UPDATED: " +
-                      this.state.reserveUpdate[
-                        this.state.reserveUpdate.length - 1
-                      ]
-                    : "LAST UPDATED: " + this.state.dateToday
+                smalltitle={ "FULL VERSION"
+                  // this.state.reserveUpdate.length == 0
+                  //   ? "LAST UPDATED: " +
+                  //     this.state.reserveUpdate[
+                  //       this.state.reserveUpdate.length - 1
+                  //     ]
+                  //   : "LAST UPDATED: " + this.state.dateToday
                 }
-                subtitle={this.state.currentReservations + " currently"}
-                val="."
+                subtitle={"Full Version Feature"}
+                val="- today"
                 number="5,400"
                 color="#F08A87"
               />
@@ -485,9 +485,9 @@ class DashboardPage extends React.Component {
                 }}
                 icon="ok"
                 title="Feedback"
-                smalltitle="LAST UPDATED: 2/3/20 "
-                subtitle="0"
-                val="today"
+                smalltitle={"Full Version"}  
+                subtitle={"Full Version Feature"}    
+                val="- today"
                 number="5,400"
                 color="#F08A87"
               />

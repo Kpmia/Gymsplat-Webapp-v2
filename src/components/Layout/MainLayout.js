@@ -41,15 +41,17 @@ class MainLayout extends ServerManager {
     this.getMachineData()
 
     firebase.auth().onAuthStateChanged(event => {
-      if (true) {
+
+      var currentUser = firebase.auth().currentUser
+      // if (true) {
           console.log(event)
-          this.setState({ lastSignIn : event.metadata.lastSignInTime })
-          this.setState({ email : event.email })
-          this.setState({ displayName : event.displayName })
+          // this.setState({ lastSignIn : event.metadata.lastSignInTime })
+          this.setState({ email : currentUser.email })
+          // this.setState({ displayName : event.displayName })
           
-      } else {
-        console.log('none')
-      }
+      // } else {
+      //   console.log('none')
+      // }
     });
 
 
@@ -65,17 +67,17 @@ class MainLayout extends ServerManager {
     //   });
     // }, 1500);
 
-    setTimeout(() => {
-      if (!this.notificationSystem) {
-        return;
-      }
+    // setTimeout(() => {
+    //   if (!this.notificationSystem) {
+    //     return;
+    //   }
 
-      this.notificationSystem.addNotification({
-        title: <MdAccessibility />,
-        message: 'You have ' + this.state.currentReservations + ' reservations currently.',
-        level: 'info',
-      });
-    }, 2500);
+    //   this.notificationSystem.addNotification({
+    //     title: <MdAccessibility />,
+    //     message: 'You have ' + this.state.currentReservations + ' reservations currently.',
+    //     level: 'info',
+    //   });
+    // }, 2500);
 
     setTimeout(() => {
       if (!this.notificationSystem) {
@@ -85,22 +87,22 @@ class MainLayout extends ServerManager {
 
       this.notificationSystem.addNotification({
         title: <MdAccountBox />,
-        message: 'Currently logged in as: ' + this.state.displayName,
+        message: 'Currently logged in as: ' + this.state.email,
         level: 'info',
       });
     }, 1000);
 
-  setTimeout(() => {
-    if (!this.notificationSystem) {
-      return;
-    }
+  // setTimeout(() => {
+  //   if (!this.notificationSystem) {
+  //     return;
+  //   }
 
-    this.notificationSystem.addNotification({
-      title: <MdFeedback />,
-      message: 'You have 0 feedback currently.',
-      level: 'info',
-    });
-  }, 1500);
+  //   this.notificationSystem.addNotification({
+  //     title: <MdFeedback />,
+  //     message: 'You have 0 feedback currently.',
+  //     level: 'info',
+  //   });
+  // }, 1500);
 }
   // close sidebar when
   handleContentClick = event => {

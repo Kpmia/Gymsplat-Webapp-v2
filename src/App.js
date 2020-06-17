@@ -24,9 +24,10 @@ const MemberProfile = React.lazy(() => import('pages/UpdateMemberInfo'))
 const Staff = React.lazy(() => import('pages/StaffTeam'));
 // const AuthForm = React.lazy(() => import('components/AuthForm'));
 
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={(props) => (
-    true
+    cookies.get('userIdManager')
       ?  <Component {...props} />
       : <Redirect to='/login' />
   )} />
@@ -79,7 +80,7 @@ class App extends React.Component {
 
           <LayoutRoute
               exact
-              path="/crc/members"
+              path="/members"
               layout={EmptyLayout}
               component={props => (
                 <User {...props} authState />

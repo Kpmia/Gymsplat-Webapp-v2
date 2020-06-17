@@ -11,7 +11,7 @@ import ServerManager from './ServerManager';
 class User extends ServerManager {
     
     handleMemberState = authState => {
-          this.props.history.push('/crc/members');
+          this.props.history.push('/members');
       };
 
     constructor() {
@@ -549,7 +549,7 @@ class User extends ServerManager {
 
 <FadeIn delay='1000'>
 
-
+{/* 
 <Card style={{'box-shadow': '0px 4px 10px rgba(132, 131, 131, 0.25)','border-radius': '8px'}}> 
     <div class="card-body">
 
@@ -639,7 +639,7 @@ class User extends ServerManager {
 
 
 
-</Card>
+</Card> */}
 
 </FadeIn>
 

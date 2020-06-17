@@ -34,8 +34,8 @@ const navComponents = [];
 const navContents = [
   { to: "/dashboard", name: "dashboard", exact: true, Icon: MdDashboard },
   { to: "/reports", name: "Reports", exact: false, Icon: MdPages },
-  { to: "/reservations", name: "Reservations", exact: false, Icon: MdPeople },
-  { to: "/feedback", name: "Feedback", exact: false, Icon: MdFeedback },
+  // { to: "/reservations", name: "Reservations", exact: false, Icon: MdPeople },
+  // { to: "/feedback", name: "Feedback", exact: false, Icon: MdFeedback },
   { to: "/activity", name: "Activity", exact: false, Icon: MdAccessTime },
 ];
 

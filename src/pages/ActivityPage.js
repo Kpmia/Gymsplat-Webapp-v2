@@ -7,6 +7,7 @@ import FadeIn from "react-fade-in";
 import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
 import DashboardPage from "./DashboardPage";
+import firebase from 'firebase'
 
 class ActivityPage extends DashboardPage {
   constructor(props) {
@@ -28,12 +29,14 @@ class ActivityPage extends DashboardPage {
   }
 
   componentDidMount() {
+
+
     window.scrollTo(0, 0);
 
     this.getWeightsCount();
-    this.getCardioCount();
-    this.getBenchPress();
-    this.getSquatRackCount();
+    // this.getCardioCount();
+    // this.getBenchPress();
+    // this.getSquatRackCount();
 
     setTimeout(() => {
       fetch("https://jsonplaceholder.typicode.com/posts")
@@ -119,7 +122,7 @@ class ActivityPage extends DashboardPage {
                   color="#F08A87"
                 />
               </Col>
-
+{/* 
               <Col lg={3} md={6} sm={6} xs={12} className="mb-3">
                 <NumberWidget
                   style={{
@@ -428,9 +431,9 @@ class ActivityPage extends DashboardPage {
                   }
                   subtitle={"49 currently"}
                   number="5,400"
-                  color="#F08A87"
-                />
-              </Col>
+                  color="#F08A87" */}
+                {/* />
+              </Col> */}
             </Row>
           </FadeIn>
 

@@ -82,7 +82,7 @@ class Header extends React.Component {
       alert('Successful Logout.')
     })
     cookies.remove('userIdManager')
-    window.location.reload()
+    window.location.href = '/login'
   }
 
   onOpenUpdateProfile = event => {
@@ -131,14 +131,20 @@ class Header extends React.Component {
 
   componentDidMount() {
 
+    firebase.auth().onAuthStateChanged(event => {
+      var currentUser = firebase.auth().currentUser
+
+      this.setState({ email : currentUser.email })
+    })
+
       
       firebase.auth().onAuthStateChanged(event => {
           if (true) {
               console.log(event)
               this.getStaffMembers(event.uid)
               this.setState({ lastSignIn : event.metadata.lastSignInTime })
-              this.setState({ email : event.email })
-              this.setState({ displayName : event.displayName })
+              // this.setState({ email : event.email })
+              // this.setState({ displayName : event.displayName })
               
           } else {
             console.log('none')
@@ -210,14 +216,14 @@ class Header extends React.Component {
             >
               <PopoverBody style={{'color': 'black'}}>
                 <UserCard style={{'color': 'black'}}
-                  role= {this.state.role}
+                  role={<strong> PILOT RUN </strong>} 
                   thirdtext={this.state.email}
                   subtext={this.state.displayName}
                   text={ "Last Signed In: " + this.state.lastSignIn}
                   className="primary"
                 >
                   <ListGroup flush>
-                    <ListGroupItem onClick={this.onOpenUpdateProfile} tag="button" action className="border-light">
+                    {/* <ListGroupItem onClick={this.onOpenUpdateProfile} tag="button" action className="border-light">
                       <MdSettingsApplications /> Profile
                     </ListGroupItem>
                     <ListGroupItem tag="button" onClick={() => window.location.href = "/staff"} action className="border-light">
@@ -231,7 +237,7 @@ class Header extends React.Component {
                     </ListGroupItem>
                     <ListGroupItem tag="button" action className="border-light">
                       <MdHelp /> Help
-                    </ListGroupItem>
+                    </ListGroupItem> */}
                     <ListGroupItem onClick={this.loggedOut} tag="button" action className="border-light">
                       <MdExitToApp  /> Signout
                     </ListGroupItem>

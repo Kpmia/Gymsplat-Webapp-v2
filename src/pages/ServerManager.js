@@ -18,12 +18,14 @@ class ServerManager extends React.Component {
 
     getWeightsCount() {
         const weights= []
-        const ref = db.collection('gtuniversity').doc('weights').collection('peoplecount').orderBy('timestamp', 'desc').limit(1)
+        const ref = db.collection("fitnessonbroughton").doc("weights").collection("peoplecount").limit(1)
         ref.get().then((snapshot) => {
           snapshot.docs.forEach(doc => {
             let array = doc.data();
 
             weights.push(array)
+
+            console.log(array)
 
             this.setState({ weights : weights })
           })        
