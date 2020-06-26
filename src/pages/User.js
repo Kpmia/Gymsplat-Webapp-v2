@@ -340,10 +340,7 @@ class User extends ServerManager {
 
     componentDidMount() {
 
-    this.getMachineData();
-    this.getPopularTimes();
     this.getWeightsCount();
-    this.getSquatRackCount();
 
 
     
@@ -385,48 +382,6 @@ class User extends ServerManager {
     render() {
 
 
-        // ** SECOND VERSION FEATURE **
-        // const notifications = []
-        // if(this.state.userId != "") {
-
-        //     notifications.push(  
-        //          <NotificationSystem
-        //         dismissible={true}
-        //         ref={notificationSystem =>
-        //           (this.notificationSystem = notificationSystem)
-        //         }
-        //         style={NOTIFICATION_SYSTEM_STYLE}
-        //       />
-        // )
-
-        
-
-        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        var d = new Date();
-        var dayName = days[d.getDay()];
-
-        var title = []
-        var numPeople = []
-
-        if (this.state.poptimes != null) {
-            for(var i = 0; i < (this.state.poptimes).length; i++) {
-                if (this.state.poptimes[i].name == dayName) {
-                    title.push(this.state.poptimes[i].name)
-                    for (var j = 0; j < this.state.poptimes[i].data.length; j++ ) {
-                        numPeople.push(this.state.poptimes[i].data[j])
-                    }
-                }
-            }
-        }
-
-        const data= getBarChart({
-            label: dayName,
-            labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 , 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            data: numPeople,
-        })
-
-
-    
 
         return (
         
@@ -645,26 +600,6 @@ class User extends ServerManager {
 
 </Col>
 
-
-        <Col lg={6} md={6} sm={6} xs={12} className="mb-3"> 
-
-
-          <FadeIn delay='1000'>
-             <Card style={{'box-shadow': '0px 4px 10px rgba(132, 131, 131, 0.25)','border-radius': '8px'}}> 
-                <div class="card-body">
-                    <p style={{'letter-spacing': '0.05em', 'fontSize': '15px', 'color': '#292929'}} class="card-text"> ACTIVITY LEVELS  </p>
-                    <p style={{'textAlign': 'center','letter-spacing': '0.05em', 'fontSize': '9px', 'color': '#888888'}} class="card-text"> {dayName.toUpperCase()} </p>
-
-                </div>
-                 <Bar style={{'border-radius': '7px'}}  data={data}/>
-                 <div class="card-body">
-                    <p style={{'textAlign': 'center','letter-spacing': '0.05em', 'fontSize': '9px', 'color': '#888888'}} class="card-text"> TIME </p>
-                </div>
-            </Card>
-
-            </FadeIn>
-
-         </Col>
 
          </Row>
 

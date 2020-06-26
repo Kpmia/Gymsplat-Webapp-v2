@@ -1,4 +1,4 @@
-import { Table } from 'reactstrap';
+import { Table, Button } from 'reactstrap';
 import Page from 'components/Page';
 import React from 'react';
 import db from './firebase'
@@ -6,6 +6,7 @@ import ReactLoading from 'react-loading'
 import FadeIn from 'react-fade-in'
 import DashboardPage from './DashboardPage';
 import firebase from 'firebase'
+import axios from 'axios'
 
 
 class TablePage extends DashboardPage {
@@ -21,6 +22,7 @@ class TablePage extends DashboardPage {
 
   componentDidMount() {
 
+
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
         console.log(user)
@@ -35,25 +37,38 @@ class TablePage extends DashboardPage {
         .then(json => this.setState({ done: true }));
     }, 1200);
 
+    let date = new Date()
 
-    var people = db.collection('gtuniversity').doc('peoplecountfromgym').collection('peoplecount').orderBy("timestamp", 'desc').limit(1)
-    people.get().then(snapshot => {
-      const peoplecountfromgym = []
-      snapshot.forEach( doc => {
-        console.log(doc.data())
-        const data = doc.data()
-        peoplecountfromgym.push(data)
-      })
-      this.setState({peoplecountfromgym :  peoplecountfromgym.People === 'number' ? parseInt(peoplecountfromgym.People) : peoplecountfromgym.People});      
-      this.setState({ peoplecountfromgym : peoplecountfromgym })
 
-    }) 
-    .catch( error => console.log(error))
-    window.scrollTo(0, 0);
+    // var people = db.collection('fitnessonbroughton').doc('weights').collection('peoplecount').where('Day', '==', date.getDate())
+    // people.get().then(snapshot => {
+    //   const peoplecountfromgym = []
+    //   snapshot.forEach( doc => {
+    //     console.log(doc.data())
+    //     const data = doc.data()
+        
+    //     console.log(data)
+
+    //     peoplecountfromgym.push(data)
+
+    //     peoplecountfromgym.sort()
+        
+        
+    //   })
+    // })
+  //     this.setState({peoplecountfromgym :  peoplecountfromgym.People === 'number' ? parseInt(peoplecountfromgym.People) : peoplecountfromgym.People});      
+  //     this.setState({ peoplecountfromgym : peoplecountfromgym })
+
+  //   }) 
+  //   .catch( error => console.log(error))
+  //   window.scrollTo(0, 0);
+  // }
   }
 
 
   render() {
+
+    var date = new Date().toLocaleDateString()
 
     if(!this.state.done) {
       return (
@@ -81,33 +96,7 @@ class TablePage extends DashboardPage {
             </FadeIn>
             )}
 
-    <div class="tableFixHead">
-    <Table striped bordered hover style={{'borderRadius': '50px'}}>
-      <tr>
-        <th> Date </th>
-        <th> Time </th>
-        <th> Location </th>
-        <th> People </th>
-      </tr>
-      
-      <tbody style={{'fontFamily': '-apple-system'}}>
-        {
-            this.state.peoplecountfromgym &&
-                this.state.peoplecountfromgym.map( peoplecountfromgym => {
-                  return (
-                    <tr> 
-                    <td classname = "mb-3"> {peoplecountfromgym.Month}/{peoplecountfromgym.Day}/{peoplecountfromgym.Year}</td>
-                    <td> {peoplecountfromgym.Hour}:{peoplecountfromgym.Minute}</td>
-                    <td> {peoplecountfromgym.Location} </td>
-                    <td> {peoplecountfromgym.People} </td>
-                    </tr>
-                  )
-                })
-              }
-              
-    </tbody>
-    </Table>
-    </div>
+    <Button onClick={() => window.location.href = 'https://us-central1-fitnessonbroughton-6994c.cloudfunctions.net/csvJsonReport'} style={{color: 'white'}}> CSV File for {date} </Button>
         </Page>
       );
     };

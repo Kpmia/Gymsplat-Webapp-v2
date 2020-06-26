@@ -47,97 +47,6 @@ class DashboardPage extends React.Component {
     };
   }
 
-  getCardioCount() {
-    const okay = db
-      .collection("fitnessonbroughton")
-      .doc("cardiomachines")
-      .collection("peoplecount")
-      .orderBy("timestamp", "desc")
-      .limit(1);
-    okay.get().then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        let cardio = doc.data();
-        let timeCardio = doc.data();
-        let timeCMonth = doc.data();
-        let timeCDay = doc.data();
-        let timeCYear = doc.data();
-        let timeCHour = doc.data();
-        let timeCMinute = doc.data();
-
-        cardio = JSON.stringify(cardio.People);
-        timeCMonth = JSON.stringify(timeCardio.Month);
-        timeCDay = JSON.stringify(timeCardio.Day);
-        timeCYear = JSON.stringify(timeCardio.Year);
-        timeCHour = JSON.stringify(timeCardio.Hour);
-        timeCMinute = JSON.stringify(timeCardio.Minute);
-
-        this.setState({ cardioData: doc.data() });
-
-        this.setState({ cardio: cardio });
-        this.setState({ timeCMonth: timeCMonth });
-        this.setState({ timeCDay: timeCDay });
-        this.setState({ timeCYear: timeCYear });
-        this.setState({ timeCHour: timeCHour });
-        this.setState({ timeCMinute: timeCMinute });
-      });
-    });
-  }
-
-  checkTimes(event) {
-    firebase
-      .database()
-      .ref("crc/location/weights")
-      .on("value", (event) => {
-        let times = event.val();
-
-        for (var time in times) {
-          if (time == this.state.weightsData.timestamp.seconds) {
-            return;
-          }
-        }
-        this.addTime();
-      });
-  }
-
-  // addTime() {
-  //   if (this.state.weightsData != null) {
-  //     firebase
-  //       .database()
-  //       .ref("crc/location/weights/" + this.state.weightsData.timestamp.seconds)
-  //       .set({
-  //         timestamp: this.state.weightsData.timestamp.seconds,
-  //         people: this.state.weightsData.People,
-  //         minute: this.state.weightsData.Minute,
-  //         hour: this.state.weightsData.Hour,
-  //         day: this.state.weightsData.Day,
-  //         month: this.state.weightsData.Month,
-  //       });
-  //   }
-  // }
-
-  // getGraphData() {
-  //   firebase
-  //     .database()
-  //     .ref("crc/location/weights")
-  //     .on("value", (event) => {
-  //       let times = event.val();
-
-  //       let newState = [];
-
-  //       for (var time in times) {
-  //         newState.push({
-  //           people: times[time].people,
-  //           minute: times[time].minute,
-  //           hour: times[time].hour,
-  //         });
-  //       }
-
-  //       this.setState({
-  //         times: newState,
-  //       });
-  //     });
-  // }
-
   getWeightsCount() {
     const ref = db
       .collection("fitnessonbroughton")
@@ -160,7 +69,13 @@ class DashboardPage extends React.Component {
         timeWDay = JSON.stringify(timeWeight.Day);
         timeWYear = JSON.stringify(timeWeight.Year);
         timeWHour = JSON.stringify(timeWeight.Hour);
-        timeWMinute = JSON.stringify(timeWeight.Minute);
+        timeWMinute = JSON.stringify(timeWeight.Minute)
+
+        if (timeWMinute.length == 0) {
+          var min =  '0' + timeWMinute
+        } else {
+          var min = timeWMinute
+        }
 
         this.setState({ weightsData: doc.data() });
 
@@ -169,116 +84,24 @@ class DashboardPage extends React.Component {
         this.setState({ timeWDay: timeWDay });
         this.setState({ timeWYear: timeWYear });
         this.setState({ timeWHour: timeWHour });
-        this.setState({ timeWMinute: timeWMinute });
+        this.setState({ timeWMinute: min });
 
-        this.checkTimes();
       });
     });
   }
 
-  getSquatRackCount() {
-    const okay = db
-      .collection("fitnessonbroughton")
-      .doc("weights")
-      .collection("peoplecount")
-      .orderBy("timestamp", "desc")
-      .limit(1);
-    okay.get().then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        let squat = doc.data();
-        let timeSWeight = doc.data();
-        let timeSMonth = doc.data();
-        let timeSDay = doc.data();
-        let timeSYear = doc.data();
-        let timeSHour = doc.data();
-        let timeSMinute = doc.data();
 
-        squat = JSON.stringify(squat.People);
-        timeSMonth = JSON.stringify(timeSWeight.Month);
-        timeSDay = JSON.stringify(timeSWeight.Day);
-        timeSYear = JSON.stringify(timeSWeight.Year);
-        timeSHour = JSON.stringify(timeSWeight.Hour);
-        timeSMinute = JSON.stringify(timeSWeight.Minute);
 
-        this.setState({ squat: squat });
-        this.setState({ timeSMonth: timeSMonth });
-        this.setState({ timeSDay: timeSDay });
-        this.setState({ timeSYear: timeSYear });
-        this.setState({ timeSHour: timeSHour });
-        this.setState({ timeSMinute: timeSMinute });
-      });
-    });
-  }
-
-  getBenchPress() {
-    const okay = db
-    .collection("fitnessonbroughton")
-    .doc("weights")
-    .collection("peoplecount")
-      .orderBy("timestamp", "desc")
-      .limit(1);
-    okay.get().then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        let bench = doc.data();
-        let timeBench = doc.data();
-        let timeBMonth = doc.data();
-        let timeBDay = doc.data();
-        let timeBYear = doc.data();
-        let timeBHour = doc.data();
-        let timeBMinute = doc.data();
-
-        bench = JSON.stringify(bench.People);
-        timeBMonth = JSON.stringify(timeBench.Month);
-        timeBDay = JSON.stringify(timeBench.Day);
-        timeBYear = JSON.stringify(timeBench.Year);
-        timeBHour = JSON.stringify(timeBench.Hour);
-        timeBMinute = JSON.stringify(timeBench.Minute);
-
-        this.setState({ bench: bench });
-        this.setState({ timeBMonth: timeBMonth });
-        this.setState({ timeBDay: timeBDay });
-        this.setState({ timeBYear: timeBYear });
-        this.setState({ timeBHour: timeBHour });
-        this.setState({ timeBMinute: timeBMinute });
-      });
-    });
-  }
-
-  getPopularTimes() {
-    axios
-      .get(
-        "https://fast-atoll-53367.herokuapp.com/https://poptimes.herokuapp.com",
-        { headers: { "Access-Control-Allow-Origin": true } }
-      )
-      .then((res) => {
-        this.setState({ poptimes: res.data.populartimes });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
 
   componentDidMount() {
     var date = new Date();
+
     var dateString = date.toISOString();
 
     this.setState({ dateToday: dateString });
 
-    var currentNumReserv = 0;
     var savedTime = [];
-    axios
-      .get(
-        "https://cors-anywhere.herokuapp.com/https://gymsplat.herokuapp.com/machines"
-      )
-      .then((res) => {
-        for (var i = 0; i < res.data.length; i++) {
-          currentNumReserv += res.data[i].queue.length;
-          for (var j = 0; j < res.data[i].queue.length; j++) {
-            savedTime.push(res.data[i].queue[j].updatedAt);
-          }
-        }
-        this.setState({ currentReservations: currentNumReserv });
-      });
+
 
     if (savedTime.length == 0) {
       var emptyArray = [];
@@ -294,16 +117,13 @@ class DashboardPage extends React.Component {
     }
 
     savedTime.sort();
-
     this.setState({ reserveUpdate: savedTime });
 
-    this.getBenchPress();
+    // this.getBenchPress();
     this.getWeightsCount();
     // this.getGraphData();
-
-    this.getCardioCount();
-    this.getSquatRackCount();
-    this.getPopularTimes();
+    // this.getCardioCount();
+    // this.getSquatRackCount();
 
     setTimeout(() => {
       fetch("https://jsonplaceholder.typicode.com/posts")
@@ -313,11 +133,7 @@ class DashboardPage extends React.Component {
   }
 
   render() {
-    var total =
-      parseInt(this.state.weights) +
-      parseInt(this.state.squat) +
-      parseInt(this.state.cardio) +
-      parseInt(this.state.bench);
+
 
     var days = [
       "Sunday",
@@ -329,6 +145,11 @@ class DashboardPage extends React.Component {
       "Saturday",
     ];
     var d = new Date();
+
+    if (d.getMinutes() -  Number.parseInt(this.state.timeBMinute) > 5) {
+      var connection = 'Wifi connection is slow...'
+    }
+    
     var dayName = days[d.getDay()];
 
     var title = [];
@@ -407,10 +228,24 @@ class DashboardPage extends React.Component {
                           "margin-right": "20px",
                         }}
                       >
-                        {total}%<progress value={total} max="100"></progress>
+                        {this.state.weights}%<progress style={{marginLeft: 10}} value={this.state.weights} max="100"></progress>
+                        <p class="float-right" style={{marginTop: 4, marginLeft: 10, fontSize: 15, color: 'white'}}> Max: 100 </p>
+
                       </label>
                     )
                   }
+                  smalltitle={
+                  "LAST UPDATED: " +
+                  this.state.timeWMonth +
+                  "/" +
+                  this.state.timeWDay +
+                  "/" +
+                  this.state.timeWYear +
+                  " @ " +
+                  this.state.timeWHour +
+                  ":" +
+                  this.state.timeWMinute
+                }
                 />
               </FadeIn>
             </div>
@@ -426,21 +261,21 @@ class DashboardPage extends React.Component {
                   "box-shadow": " 2px 62px 75px -25px #EF8887 ",
                 }}
                 icon="ok"
-                title="Gym Visits"
+                title="Current Gym Count"
                 smalltitle={
                   "LAST UPDATED: " +
-                  this.state.timeBMonth +
+                  this.state.timeWMonth +
                   "/" +
-                  this.state.timeBDay +
+                  this.state.timeWDay +
                   "/" +
-                  this.state.timeBYear +
+                  this.state.timeWYear +
                   " @ " +
-                  this.state.timeBHour +
+                  this.state.timeWHour +
                   ":" +
-                  this.state.timeBMinute
+                  this.state.timeWMinute
                 }
-                subtitle={total + " currently"}
-                val="FULL VERSION FEATURE"
+                subtitle={this.state.weights + " currently"}
+                val="Full Version Feature"
                 number="5,400"
                 color="#F08A87"
               />

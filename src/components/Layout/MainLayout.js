@@ -38,46 +38,11 @@ class MainLayout extends ServerManager {
 
   componentDidMount() {
 
-    this.getMachineData()
-
     firebase.auth().onAuthStateChanged(event => {
 
       var currentUser = firebase.auth().currentUser
-      // if (true) {
-          console.log(event)
-          // this.setState({ lastSignIn : event.metadata.lastSignInTime })
-          this.setState({ email : currentUser.email })
-          // this.setState({ displayName : event.displayName })
-          
-      // } else {
-      //   console.log('none')
-      // }
+      this.setState({ email : currentUser.email })
     });
-
-
-    // setTimeout(() => {
-    //   if (!this.notificationSystem) {
-    //     return;
-    //   }
-
-    //   this.notificationSystem.addNotification({
-    //     title: <MdImportantDevices />,
-    //     message: 'You reached 1,000 gym visits!',
-    //     level: 'info',
-    //   });
-    // }, 1500);
-
-    // setTimeout(() => {
-    //   if (!this.notificationSystem) {
-    //     return;
-    //   }
-
-    //   this.notificationSystem.addNotification({
-    //     title: <MdAccessibility />,
-    //     message: 'You have ' + this.state.currentReservations + ' reservations currently.',
-    //     level: 'info',
-    //   });
-    // }, 2500);
 
     setTimeout(() => {
       if (!this.notificationSystem) {

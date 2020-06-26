@@ -7,7 +7,7 @@ import FadeIn from "react-fade-in";
 import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
 import DashboardPage from "./DashboardPage";
-import firebase from 'firebase'
+import GymFloor from '../assets/img/gymfloor.svg'
 
 class ActivityPage extends DashboardPage {
   constructor(props) {
@@ -435,6 +435,14 @@ class ActivityPage extends DashboardPage {
                 {/* />
               </Col> */}
             </Row>
+
+            <br></br>
+
+            <h2>  <strong> Gym Floor </strong> </h2>
+
+
+            <img height={'auto'} width='100%' src={GymFloor} />
+
           </FadeIn>
 
           {/* <div>
