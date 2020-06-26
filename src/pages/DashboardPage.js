@@ -3,7 +3,6 @@ import { NumberWidget } from "components/Widget";
 import { getStackLineChart, stackLineChartOptions } from "demos/chartjs";
 import React from "react";
 import db from "./firebase";
-import ReactLoading from "react-loading";
 import ModalExample from "./Modal";
 import { Line } from "react-chartjs-2";
 import axios from "axios";
@@ -69,12 +68,12 @@ class DashboardPage extends React.Component {
         timeWDay = JSON.stringify(timeWeight.Day);
         timeWYear = JSON.stringify(timeWeight.Year);
         timeWHour = JSON.stringify(timeWeight.Hour);
-        timeWMinute = JSON.stringify(timeWeight.Minute)
+        timeWMinute = JSON.stringify(timeWeight.Minute);
 
         if (timeWMinute.length == 0) {
-          var min =  '0' + timeWMinute
+          var min = "0" + timeWMinute;
         } else {
-          var min = timeWMinute
+          var min = timeWMinute;
         }
 
         this.setState({ weightsData: doc.data() });
@@ -85,13 +84,9 @@ class DashboardPage extends React.Component {
         this.setState({ timeWYear: timeWYear });
         this.setState({ timeWHour: timeWHour });
         this.setState({ timeWMinute: min });
-
       });
     });
   }
-
-
-
 
   componentDidMount() {
     var date = new Date();
@@ -101,7 +96,6 @@ class DashboardPage extends React.Component {
     this.setState({ dateToday: dateString });
 
     var savedTime = [];
-
 
     if (savedTime.length == 0) {
       var emptyArray = [];
@@ -133,8 +127,6 @@ class DashboardPage extends React.Component {
   }
 
   render() {
-
-
     var days = [
       "Sunday",
       "Monday",
@@ -146,10 +138,10 @@ class DashboardPage extends React.Component {
     ];
     var d = new Date();
 
-    if (d.getMinutes() -  Number.parseInt(this.state.timeBMinute) > 5) {
-      var connection = 'Wifi connection is slow...'
+    if (d.getMinutes() - Number.parseInt(this.state.timeBMinute) > 5) {
+      var connection = "Wifi connection is slow...";
     }
-    
+
     var dayName = days[d.getDay()];
 
     var title = [];
@@ -218,34 +210,20 @@ class DashboardPage extends React.Component {
                   }}
                   title="Gym Utilization"
                   subtitle={
-                    !this.state.done ? (
-                      <ReactLoading type={"spin"} color={"#6B7CF7"} />
-                    ) : (
-                      <label
+                    <label>
+                      {/* {this.state.weights}% */}
+                      <progress
                         style={{
-                          fontWeight: "thin",
-                          fontSize: "20px",
-                          "margin-right": "20px",
+                          marginLeft: "20",
+                          align: "center",
                         }}
-                      >
-                        {this.state.weights}%<progress style={{marginLeft: 10}} value={this.state.weights} max="100"></progress>
-                        <p class="float-right" style={{marginTop: 4, marginLeft: 10, fontSize: 15, color: 'white'}}> Max: 100 </p>
-
-                      </label>
-                    )
+                        value={0}
+                        max="100"
+                      ></progress>{" "}
+                      0%
+                    </label>
                   }
-                  smalltitle={
-                  "LAST UPDATED: " +
-                  this.state.timeWMonth +
-                  "/" +
-                  this.state.timeWDay +
-                  "/" +
-                  this.state.timeWYear +
-                  " @ " +
-                  this.state.timeWHour +
-                  ":" +
-                  this.state.timeWMinute
-                }
+                  smalltitle={"FULL VERSION FEATURE"}
                 />
               </FadeIn>
             </div>
@@ -261,21 +239,22 @@ class DashboardPage extends React.Component {
                   "box-shadow": " 2px 62px 75px -25px #EF8887 ",
                 }}
                 icon="ok"
-                title="Current Gym Count"
-                smalltitle={
-                  "LAST UPDATED: " +
-                  this.state.timeWMonth +
-                  "/" +
-                  this.state.timeWDay +
-                  "/" +
-                  this.state.timeWYear +
-                  " @ " +
-                  this.state.timeWHour +
-                  ":" +
-                  this.state.timeWMinute
-                }
-                subtitle={this.state.weights + " currently"}
-                val="Full Version Feature"
+                title="Member Head Count"
+                subtitle="0 currently"
+                // subtitle={this.state.weights + " currently"}
+                // val={
+                //   "Last Updated: " +
+                //   this.state.timeWMonth +
+                //   "/" +
+                //   this.state.timeWDay +
+                //   "/" +
+                //   this.state.timeWYear +
+                //   " @ " +
+                //   this.state.timeWHour +
+                //   ":" +
+                //   this.state.timeWMinute
+                // }
+                smalltitle="FULL VERSION FEATURE"
                 number="5,400"
                 color="#F08A87"
               />
@@ -293,7 +272,9 @@ class DashboardPage extends React.Component {
                 }}
                 icon="ok"
                 title="Reservations"
-                smalltitle={ "FULL VERSION"
+                subtitle={"0 currently"}
+                smalltitle={
+                  "FULL VERSION FEATURE"
                   // this.state.reserveUpdate.length == 0
                   //   ? "LAST UPDATED: " +
                   //     this.state.reserveUpdate[
@@ -301,8 +282,7 @@ class DashboardPage extends React.Component {
                   //     ]
                   //   : "LAST UPDATED: " + this.state.dateToday
                 }
-                subtitle={"Full Version Feature"}
-                val="- today"
+                // val="- today"
                 number="5,400"
                 color="#F08A87"
               />
@@ -320,9 +300,8 @@ class DashboardPage extends React.Component {
                 }}
                 icon="ok"
                 title="Feedback"
-                smalltitle={"Full Version"}  
-                subtitle={"Full Version Feature"}    
-                val="- today"
+                subtitle={"0 currently"}
+                smalltitle={"FULL VERSION FEATURE"}
                 number="5,400"
                 color="#F08A87"
               />

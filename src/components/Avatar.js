@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'utils/propTypes';
-import logo from '../assets/img/logo/logo_200.png'
-import classNames from 'classnames';
-
+import React from "react";
+import PropTypes from "utils/propTypes";
+import logo from "../assets/img/logo/logo_200.png";
+import classNames from "classnames";
 
 const Avatar = ({
   rounded,
@@ -14,15 +13,15 @@ const Avatar = ({
   style,
   ...restProps
 }) => {
-  const classes = classNames({ 'rounded-circle': circle, rounded }, className);
+  const classes = classNames({ "rounded-circle": circle, rounded }, className);
   return (
     <div>
-    <Tag
-      src={src}
-      style={{ width: size, height: size, ...style }}
-      className={classes}
-      {...restProps}
-    />
+      <Tag
+        src={src}
+        style={{ width: size, height: size, ...style }}
+        className={classes}
+        {...restProps}
+      />
     </div>
   );
 };
@@ -37,10 +36,10 @@ Avatar.propTypes = {
 };
 
 Avatar.defaultProps = {
-  tag: 'img',
+  tag: "img",
   rounded: false,
   circle: false,
-  size: 50,
+  size: 35,
   src: logo,
   style: {},
 };

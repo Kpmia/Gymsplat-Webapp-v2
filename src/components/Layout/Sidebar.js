@@ -33,10 +33,10 @@ const navComponents = [];
 
 const navContents = [
   { to: "/dashboard", name: "dashboard", exact: true, Icon: MdDashboard },
+  { to: "/activity", name: "Gym Floor", exact: false, Icon: MdAccessTime },
   { to: "/reports", name: "Reports", exact: false, Icon: MdPages },
   // { to: "/reservations", name: "Reservations", exact: false, Icon: MdPeople },
   // { to: "/feedback", name: "Feedback", exact: false, Icon: MdFeedback },
-  { to: "/activity", name: "Activity", exact: false, Icon: MdAccessTime },
 ];
 
 const pageContents = [];
@@ -70,7 +70,11 @@ class Sidebar extends React.Component {
           <img
             src={GymSplatLogo}
             style={{
-              width: "90%",
+              width: "80%",
+              align: "center",
+              display: "block",
+              marginLeft: "auto",
+              marginRight: "auto",
             }}
           ></img>
 

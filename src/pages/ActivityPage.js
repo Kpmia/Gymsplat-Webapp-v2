@@ -7,7 +7,7 @@ import FadeIn from "react-fade-in";
 import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
 import DashboardPage from "./DashboardPage";
-import GymFloor from '../assets/img/gymfloor.svg'
+import GymFloor from "../assets/img/gymfloor.svg";
 
 class ActivityPage extends DashboardPage {
   constructor(props) {
@@ -29,8 +29,6 @@ class ActivityPage extends DashboardPage {
   }
 
   componentDidMount() {
-
-
     window.scrollTo(0, 0);
 
     this.getWeightsCount();
@@ -43,6 +41,13 @@ class ActivityPage extends DashboardPage {
         .then((response) => response.json())
         .then((json) => this.setState({ done: true }));
     }, 1200);
+  }
+
+  standardHour(militaryHour) {
+    if (militaryHour > 12) {
+      return militaryHour - 12;
+    }
+    return militaryHour;
   }
 
   render() {
@@ -104,16 +109,16 @@ class ActivityPage extends DashboardPage {
                     "box-shadow": " 2px 62px 75px -25px #805BE9",
                   }}
                   icon="ok"
-                  title="Section 1"
+                  title="Deadlift Section"
                   smalltitle={
-                    "LAST UPDATED: " +
+                    "Last Updated: " +
                     this.state.timeWMonth +
                     "/" +
                     this.state.timeWDay +
                     "/" +
                     this.state.timeWYear +
-                    " @ " +
-                    this.state.timeWHour +
+                    " at " +
+                    this.standardHour(this.state.timeWHour) +
                     ":" +
                     this.state.timeWMinute
                   }
@@ -122,7 +127,7 @@ class ActivityPage extends DashboardPage {
                   color="#F08A87"
                 />
               </Col>
-{/* 
+              {/* 
               <Col lg={3} md={6} sm={6} xs={12} className="mb-3">
                 <NumberWidget
                   style={{
@@ -432,17 +437,20 @@ class ActivityPage extends DashboardPage {
                   subtitle={"49 currently"}
                   number="5,400"
                   color="#F08A87" */}
-                {/* />
+              {/* />
               </Col> */}
             </Row>
 
             <br></br>
 
-            <h2>  <strong> Gym Floor </strong> </h2>
+            <h2>
+              {" "}
+              <br></br>
+              <br></br>
+              <strong> Gym Floor </strong>{" "}
+            </h2>
 
-
-            <img height={'auto'} width='100%' src={GymFloor} />
-
+            <img height={"auto"} width="100%" src={GymFloor} />
           </FadeIn>
 
           {/* <div>
