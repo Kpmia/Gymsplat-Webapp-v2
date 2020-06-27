@@ -148,16 +148,6 @@ class DashboardPage extends React.Component {
     var title = [];
     var numPeople = [];
 
-    if (this.state.poptimes != null) {
-      for (var i = 0; i < this.state.poptimes.length; i++) {
-        if (this.state.poptimes[i].name == dayName) {
-          title.push(this.state.poptimes[i].name);
-          for (var j = 0; j < this.state.poptimes[i].data.length; j++) {
-            numPeople.push(this.state.poptimes[i].data[j]);
-          }
-        }
-      }
-    }
 
     var minutes = [];
     var people = [];
@@ -174,9 +164,9 @@ class DashboardPage extends React.Component {
     }
 
     const data = getStackLineChart({
-      label: dayName,
-      labels: minutes,
-      data: people,
+      label: ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12am" ],
+      labels: ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12am" ],
+      // data: [1, 2, 3],
     });
 
     return (
@@ -297,8 +287,9 @@ class DashboardPage extends React.Component {
             </FadeIn>
           </Col>
         </Row>
+    <br></br>
+    <div class="card-body" style={{justifyContent: 'center'}}>
 
-        <br></br>
         <FadeIn>
           <h1
             style={{
@@ -312,8 +303,6 @@ class DashboardPage extends React.Component {
             General Trends{" "}
           </h1>
         </FadeIn>
-        <br></br>
-        <div class="card-body">
           <p
             style={{
               textAlign: "center",
@@ -327,8 +316,10 @@ class DashboardPage extends React.Component {
             {dayName.toUpperCase()}{" "}
           </p>
         </div>
-        <Col lg={25} md={50} sm={25} xs={25}>
+        <div style={{float: 'float-center', justifyContent: 'center' }}>
+        <Col style={{centerAligh: 'center'}} lg={12} md={12} sm={25} xs={25}>
           <Line
+          
             style={{ background: "#F0F3F9" }}
             data={data}
             options={stackLineChartOptions}
@@ -354,6 +345,7 @@ class DashboardPage extends React.Component {
             <CardTitle fontFamily="Poppins"></CardTitle>
           </CardBody>
         </Col>
+        </div>
       </Page>
     );
   }

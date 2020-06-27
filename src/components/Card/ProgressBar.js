@@ -30,6 +30,9 @@ title,
           <Typography className="primary" style = {{'fontWeight': 'bold', 'fontSize': '25px', 'color': '#FFFF', 'opacity': '0.9'}}>
                       <progress
                         style={{
+
+                            position: 'relative',
+                            display: 'flex',
                           marginLeft: "0",
                           width: 190,
                         }}
