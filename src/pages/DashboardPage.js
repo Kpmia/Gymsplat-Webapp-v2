@@ -1,5 +1,6 @@
 import Page from "components/Page";
 import { NumberWidget } from "components/Widget";
+import ProgressBar from '../components/Card/ProgressBar';
 import { getStackLineChart, stackLineChartOptions } from "demos/chartjs";
 import React from "react";
 import db from "./firebase";
@@ -200,8 +201,8 @@ class DashboardPage extends React.Component {
         <Row>
           <Col lg={3} md={6} sm={6} xs={12} c className="mb-3">
             <div class="mask flex-center rgba-blue-light">
-              <FadeIn delay="100">
-                <NumberWidget
+            <FadeIn delay="100">
+            <ProgressBar 
                   style={{
                     background:
                       "linear-gradient(124.39deg, #A77EF7 27.11%, #8E76F7 60.16%, #7B70F7 92.06%)",
@@ -209,25 +210,13 @@ class DashboardPage extends React.Component {
                     "box-shadow": "2px 62px 75px -25px #A4A0F9",
                   }}
                   title="Gym Utilization"
-                  subtitle={
-                    <label>
-                      {/* {this.state.weights}% */}
-                      <progress
-                        style={{
-                          marginLeft: "20",
-                          align: "center",
-                        }}
-                        value={0}
-                        max="100"
-                      ></progress>{" "}
-                      0%
-                    </label>
-                  }
                   smalltitle={"FULL VERSION FEATURE"}
                 />
               </FadeIn>
             </div>
           </Col>
+
+          
 
           <Col lg={3} md={6} sm={6} xs={12} className="mb-3">
             <FadeIn delay="200">

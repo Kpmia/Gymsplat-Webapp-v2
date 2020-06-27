@@ -9,20 +9,19 @@ exports.csvJsonReport = functions.https.onRequest((request, response) => {
 
     var date = new Date()
   const db = adminone.firestore();
-  const ordersRef = db.collection('fitnessonbroughton').doc('weights').collection('peoplecount').where('Day', '==', date.getDate())
+  const ordersRef = db.collection('fitnessonbroughton').doc('weights').collection('peoplecount')
   return ordersRef.get()
     .then((querySnapshot) => {
       const orders = [];
 
       querySnapshot.forEach(doc => {
         const order = doc.data();
-        delete order["timestamp"]
         orders.push(order);
       });
       const csv = json2csv(orders);
       response.setHeader(
         "Content-disposition",
-        "attachment; filename=report.csv"
+        "attachment; filename=Report.csv"
       );
       response.set("Content-Type", "text/csv");
       response.status(200).send(csv)
