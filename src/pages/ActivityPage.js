@@ -8,6 +8,7 @@ import ReactLoading from "react-loading";
 import "bootstrap/dist/css/bootstrap.css";
 import DashboardPage from "./DashboardPage";
 import GymFloor from "../assets/img/gymfloor.svg";
+import { system } from "faker";
 
 class ActivityPage extends DashboardPage {
   constructor(props) {
@@ -43,11 +44,20 @@ class ActivityPage extends DashboardPage {
     }, 1200);
   }
 
-  standardHour(militaryHour) {
-    if (militaryHour > 12) {
-      return militaryHour - 12;
+  standardTime(militaryHour, minutes) {
+    var hour;
+    var amORpm;
+    if (militaryHour == 0) {
+      hour = 12;
+      amORpm = "am";
+    } else if (militaryHour > 12) {
+      hour = militaryHour - 12;
+      amORpm = "pm";
+    } else {
+      hour = militaryHour;
+      amORpm = "am";
     }
-    return militaryHour;
+    return hour + ":" + minutes + " " + amORpm;
   }
 
   render() {
@@ -118,9 +128,10 @@ class ActivityPage extends DashboardPage {
                     "/" +
                     this.state.timeWYear +
                     " at " +
-                    this.standardHour(this.state.timeWHour) +
-                    ":" +
-                    this.state.timeWMinute
+                    this.standardTime(
+                      this.state.timeWHour,
+                      this.state.timeWMinute
+                    )
                   }
                   subtitle={this.state.weights + " currently"}
                   number="5,400"

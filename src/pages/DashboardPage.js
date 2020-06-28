@@ -1,6 +1,6 @@
 import Page from "components/Page";
 import { NumberWidget } from "components/Widget";
-import ProgressBar from '../components/Card/ProgressBar';
+import ProgressBar from "../components/Card/ProgressBar";
 import { getStackLineChart, stackLineChartOptions } from "demos/chartjs";
 import React from "react";
 import db from "./firebase";
@@ -148,7 +148,6 @@ class DashboardPage extends React.Component {
     var title = [];
     var numPeople = [];
 
-
     var minutes = [];
     var people = [];
 
@@ -164,8 +163,48 @@ class DashboardPage extends React.Component {
     }
 
     const data = getStackLineChart({
-      label: ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12am" ],
-      labels: ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm", "11pm", "12am" ],
+      label: [
+        "6am",
+        "7am",
+        "8am",
+        "9am",
+        "10am",
+        "11am",
+        "12pm",
+        "1pm",
+        "2pm",
+        "3pm",
+        "4pm",
+        "5pm",
+        "6pm",
+        "7pm",
+        "8pm",
+        "9pm",
+        "10pm",
+        "11pm",
+        "12am",
+      ],
+      labels: [
+        "6am",
+        "7am",
+        "8am",
+        "9am",
+        "10am",
+        "11am",
+        "12pm",
+        "1pm",
+        "2pm",
+        "3pm",
+        "4pm",
+        "5pm",
+        "6pm",
+        "7pm",
+        "8pm",
+        "9pm",
+        "10pm",
+        "11pm",
+        "12am",
+      ],
       // data: [1, 2, 3],
     });
 
@@ -191,8 +230,8 @@ class DashboardPage extends React.Component {
         <Row>
           <Col lg={3} md={6} sm={6} xs={12} c className="mb-3">
             <div class="mask flex-center rgba-blue-light">
-            <FadeIn delay="100">
-            <ProgressBar 
+              <FadeIn delay="100">
+                <ProgressBar
                   style={{
                     background:
                       "linear-gradient(124.39deg, #A77EF7 27.11%, #8E76F7 60.16%, #7B70F7 92.06%)",
@@ -205,8 +244,6 @@ class DashboardPage extends React.Component {
               </FadeIn>
             </div>
           </Col>
-
-          
 
           <Col lg={3} md={6} sm={6} xs={12} className="mb-3">
             <FadeIn delay="200">
@@ -287,22 +324,21 @@ class DashboardPage extends React.Component {
             </FadeIn>
           </Col>
         </Row>
-    <br></br>
-    <div class="card-body" style={{justifyContent: 'center'}}>
-
-        <FadeIn>
-          <h1
-            style={{
-              fontFamily: "-apple-system, BlinkMacSystemFont",
-              fontSize: "25px",
-              fontWeight: "bold",
-              color: "#0A0D18",
-            }}
-          >
-            {" "}
-            General Trends{" "}
-          </h1>
-        </FadeIn>
+        <br></br>
+        <div class="card-body" style={{ justifyContent: "center" }}>
+          <FadeIn>
+            <h1
+              style={{
+                fontFamily: "-apple-system, BlinkMacSystemFont",
+                fontSize: "25px",
+                fontWeight: "bold",
+                color: "#0A0D18",
+              }}
+            >
+              {" "}
+              General Trends{" "}
+            </h1>
+          </FadeIn>
           <p
             style={{
               textAlign: "center",
@@ -316,35 +352,40 @@ class DashboardPage extends React.Component {
             {dayName.toUpperCase()}{" "}
           </p>
         </div>
-        <div style={{float: 'float-center', justifyContent: 'center' }}>
-        <Col style={{centerAligh: 'center'}} lg={12} md={12} sm={25} xs={25}>
-          <Line
-          
-            style={{ background: "#F0F3F9" }}
-            data={data}
-            options={stackLineChartOptions}
-          />
-          <div class="card-body">
-            <p
-              style={{
-                textAlign: "center",
-                "letter-spacing": "0.05em",
-                fontSize: "9px",
-                color: "#888888",
-              }}
-              class="card-text"
-            >
-              {" "}
-              TIME (HOUR){" "}
-            </p>
-          </div>
-          <CardBody
-            fontFamily="Poppins"
-            style={{ position: "absolute", left: 5, textShadow: false }}
+        <div style={{ float: "float-center", justifyContent: "center" }}>
+          <Col
+            style={{ centerAligh: "center" }}
+            lg={12}
+            md={12}
+            sm={25}
+            xs={25}
           >
-            <CardTitle fontFamily="Poppins"></CardTitle>
-          </CardBody>
-        </Col>
+            <Line
+              style={{ background: "#F0F3F9" }}
+              data={data}
+              options={stackLineChartOptions}
+            />
+            <div class="card-body">
+              <p
+                style={{
+                  textAlign: "center",
+                  "letter-spacing": "0.05em",
+                  fontSize: "9px",
+                  color: "#888888",
+                }}
+                class="card-text"
+              >
+                {" "}
+                TIME (HOUR){" "}
+              </p>
+            </div>
+            <CardBody
+              fontFamily="Poppins"
+              style={{ position: "absolute", left: 5, textShadow: false }}
+            >
+              <CardTitle fontFamily="Poppins"></CardTitle>
+            </CardBody>
+          </Col>
         </div>
       </Page>
     );
